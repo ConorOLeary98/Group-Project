@@ -29,13 +29,13 @@ void loop() {
   String stringLat = "";  
   String stringLng = "";   
   
-  stringLat+=String(int(GPS.getLatitude()))+ "."+String(getDecimal(GPS.getLatitude())); //combining both whole and decimal part in string with a fullstop between them
-  char charLat[stringLat.length()+1];                      //initialise character array to store the values
-  stringLat.toCharArray(charLat,stringLat.length()+1);     //passing the value of the string to the character array
+  stringLat+=String(int(GPS.getLatitude()))+ "."+String(getDecimal(GPS.getLatitude())); 
+  char charLat[stringLat.length()+1];                      
+  stringLat.toCharArray(charLat,stringLat.length()+1);     
 
-  stringLng+=String(int(GPS.getLongitude()))+ "."+String(getDecimal(GPS.getLongitude())); //combining both whole and decimal part in string with a fullstop between them
-  char charLng[stringLng.length()+1];                      //initialise character array to store the values
-  stringLng.toCharArray(charLng,stringLng.length()+1);     //passing the value of the string to the character array
+  stringLng+=String(int(GPS.getLongitude()))+ "."+String(getDecimal(GPS.getLongitude())); 
+  char charLng[stringLng.length()+1];                      
+  stringLng.toCharArray(charLng,stringLng.length()+1);    
 
 
   char buf[20];
@@ -88,9 +88,9 @@ void onInternetError(int requestId, int errorNumber)
 long getDecimal(float val)
 {
   int intPart = int(val);
-  long decPart = 10000000*(val-intPart); //I am multiplying by 1000 assuming that the foat values will have a maximum of 3 decimal places. 
-                                    //Change to match the number of decimal places you need
-  if(decPart>0)return(decPart);           //return the decimal part of float number if it is available 
-  else if(decPart<0)return((-1)*decPart); //if negative, multiply by -1
-  else if(decPart=0)return(00);           //return 0 if decimal part of float number is not available
+  long decPart = 10000000*(val-intPart); 
+                                    
+  if(decPart>0)return(decPart);            
+  else if(decPart<0)return((-1)*decPart); 
+  else if(decPart=0)return(00);           
 }
