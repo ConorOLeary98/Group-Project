@@ -98,18 +98,16 @@ public class TripRequestForm extends AppCompatActivity {
 
         @Override
         protected void onCancelled() {
-            // TODO Auto-generated method stub
+            //
             super.onCancelled();
             this.cancel(true);
         }
 
         @Override
         protected StringBuilder doInBackground(Void... params) {
-            // TODO Auto-generated method stub
             try {
                 HttpURLConnection conn = null;
                 StringBuilder jsonResults = new StringBuilder();
-                //TODO add api key
                 String googleMapUrl = "http://maps.googleapis.com/maps/api/geocode/json?address="
                         + this.place + "+CA&key=AIzaSyCqMxOD1llGPiwGAKFbxLy7NlEuoNU2PqM";
 
@@ -135,7 +133,6 @@ public class TripRequestForm extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(StringBuilder result) {
-            // TODO Auto-generated method stub
             super.onPostExecute(result);
             try {
                 JSONObject jsonObj = new JSONObject(result.toString());
@@ -168,7 +165,6 @@ public class TripRequestForm extends AppCompatActivity {
 
 
             } catch (JSONException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
 
             }
