@@ -40,7 +40,8 @@
 
         <activity
             android:name=".MapVehicleViewerActivity"
-            android:label="@string/title_activity_map_vehicle_viewer"></activity>
+            android:label="@string/title_activity_map_vehicle_viewer" />
+        <activity android:name=".TripRequestForm"></activity>
     </application>
 
 </manifest>
