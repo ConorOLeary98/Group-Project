@@ -6,46 +6,132 @@
     android:layout_height="match_parent"
     tools:context=".TripRequestForm">
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/textView"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Journey Start"
-            tools:layout_editor_absoluteX="94dp"
-            tools:layout_editor_absoluteY="31dp" />
+            android:layout_height="match_parent">
 
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="94dp"
-            tools:layout_editor_absoluteY="61dp" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Journey Start"
+                tools:layout_editor_absoluteX="94dp"
+                tools:layout_editor_absoluteY="31dp" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Destination"
-            tools:layout_editor_absoluteX="94dp"
-            tools:layout_editor_absoluteY="120dp" />
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="94dp"
+                tools:layout_editor_absoluteY="61dp" />
 
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteTextView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="93dp"
-            tools:layout_editor_absoluteY="148dp" />
+        </TableRow>
 
-        <Button
-            android:id="@+id/button"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Request Trip" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Destination"
+                tools:layout_editor_absoluteX="94dp"
+                tools:layout_editor_absoluteY="120dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="93dp"
+                tools:layout_editor_absoluteY="148dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="40dp">
+
+            <Button
+                android:id="@+id/btn_calc_trip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calculate Trip Cost" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:id="@+id/TV_trip_dist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trip Distance (km)" />
+
+            <TextView
+                android:id="@+id/TV_dist_display"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:id="@+id/TV_trip_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trip Cost (€)" />
+
+            <TextView
+                android:id="@+id/TV_cost_display"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
+
+
+            <TextView
+                android:id="@+id/TV_Journey_Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Est. Journey Time" />
+
+            <TextView
+                android:id="@+id/TV_Journey_Time_Display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/btn_request_trip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="Request Trip" />
+        </TableRow>
+    </TableLayout>
 
 </android.support.constraint.ConstraintLayout>
