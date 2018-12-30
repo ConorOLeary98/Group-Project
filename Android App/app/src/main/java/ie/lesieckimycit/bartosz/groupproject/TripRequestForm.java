@@ -1,6 +1,7 @@
 package ie.lesieckimycit.bartosz.groupproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -45,6 +46,7 @@ public class TripRequestForm extends AppCompatActivity {
     private Double tripDist;
     private LatLng startLatLng;
     private LatLng destLatLng;
+
 
 
     @Override
@@ -128,42 +130,16 @@ public class TripRequestForm extends AppCompatActivity {
         requestTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO send trip to firebase, wait for approval, listen for changes on status field, if approved, navigate to map with markers. If denied, show alert. While pending show loading spinner?
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("tripRequests");
+                Intent intent = new Intent(TripRequestForm.this, PendingRequest.class);
 
-                Request myRequest = new Request(startLatLng,destLatLng);
+                Bundle args = new Bundle();
+                args.putParcelable("start",startLatLng);
+                args.putParcelable("dest",destLatLng);
+                intent.putExtra("bundle",args);
+                //intent.putExtra("start",startLatLng);
+                //intent.putExtra("dest",destLatLng);
 
-                RandomString gen = new RandomString(8, ThreadLocalRandom.current());
-                String ID = gen.nextString();
-                myRef.child(ID).setValue(myRequest);
-
-                myRef = database.getReference("tripRequests/" + ID  );
-
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.child("status").getValue(String.class) == "approved"){
-                            //TODO nav to map with data
-                        }
-                        else if(dataSnapshot.child("status").getValue(String.class) == "denied"){
-                            //TODO alert saying trip denied
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                //ID
-                //state pending
-                //start latlng
-                //dest latlng
-                //vehicleid = ""
-
-
+                startActivity(intent);
             }
         });
     }

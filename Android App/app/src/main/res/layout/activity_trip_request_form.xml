@@ -17,7 +17,7 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="match_parent"
+                android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:text="Journey Start"
                 tools:layout_editor_absoluteX="94dp"
@@ -26,7 +26,7 @@
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView"
                 android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 tools:layout_editor_absoluteX="94dp"
                 tools:layout_editor_absoluteY="61dp" />
 
@@ -48,7 +48,7 @@
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 tools:layout_editor_absoluteX="93dp"
                 tools:layout_editor_absoluteY="148dp" />
         </TableRow>

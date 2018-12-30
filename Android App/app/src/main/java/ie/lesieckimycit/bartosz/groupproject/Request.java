@@ -8,6 +8,7 @@ public class Request {
     public LatLng finish;
     public String state;
     public String vehicleID;
+    public Boolean userCanceled;
 
     public Request(){}
 
@@ -16,5 +17,6 @@ public class Request {
         this.finish = finish;
         this.state = "pending";
         this.vehicleID = "";
+        this.userCanceled = false;
     }
 }
