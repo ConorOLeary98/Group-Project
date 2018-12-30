@@ -2,10 +2,13 @@ package ie.lesieckimycit.bartosz.groupproject;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -29,6 +32,7 @@ public class MapVehicleViewerActivity extends FragmentActivity implements OnMapR
     private static final String TAG = "map";
     private GoogleMap mMap;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,13 +55,13 @@ public class MapVehicleViewerActivity extends FragmentActivity implements OnMapR
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         Intent i = getIntent();
-
         Bundle bundle = i.getParcelableExtra("bundle");
         final LatLng startLatLng = bundle.getParcelable("start");
         final LatLng destLatLng = bundle.getParcelable("dest");
-        String vehicleID = bundle.getString("vehicleID");
+        final String vehicleID = bundle.getString("vehicleID");
         final String ID = bundle.getString("ID");
         final Boolean[] PICKED_UP = {false};
+        final boolean[] notified = {false};
 
         googleMap.getUiSettings().setCompassEnabled(true);
         googleMap.getUiSettings().setMapToolbarEnabled(true);
@@ -65,6 +69,8 @@ public class MapVehicleViewerActivity extends FragmentActivity implements OnMapR
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("vehicleLocations/"+vehicleID+"/GPS");
+
+
 
         final Double[] valLat = new Double[1];
         final Double[] valLng = new Double[1];
@@ -146,8 +152,47 @@ public class MapVehicleViewerActivity extends FragmentActivity implements OnMapR
                 float distanceInMetersPickUp = resultsPickUp[0];
                 boolean isWithin20MetersPickUp = distanceInMetersPickUp < 20;
 
-                if (isWithin20MetersPickUp){
+                if (isWithin20MetersPickUp && !PICKED_UP[0]){
                     PICKED_UP[0] = true;
+
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("vehicleLocations/"+vehicleID);
+
+                    final String[] carReg = new String[1];
+                    final String[] carModel = new String[1];
+                    final String[] carColour = new String[1];
+
+                    myRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange( DataSnapshot dataSnapshot) {
+
+                           carReg[0] = dataSnapshot.child("Reg").getValue(String.class);
+                           carModel[0] = dataSnapshot.child("Model").getValue(String.class);
+                           carColour[0] = dataSnapshot.child("Colour").getValue(String.class);
+
+
+                            if (carReg[0] != null && carModel[0] != null && carColour[0] != null && !notified[0]) {
+                                Notification.Builder my_notify = new Notification.Builder(MapVehicleViewerActivity.this)
+                                        .setSmallIcon(R.drawable.ic_stat_name)
+                                        .setContentText("")
+                                        .setContentTitle("Your ride is close")
+                                        .setStyle(new Notification.BigTextStyle()
+                                                .bigText("Car details:\nColour:\t" + carColour[0] + "\nModel:\t" + carModel[0] + "\nReg:\t" + carReg[0]));
+
+                                NotificationManager mNotificationManager = (NotificationManager) getSystemService(MapVehicleViewerActivity.this.NOTIFICATION_SERVICE);
+                                mNotificationManager.notify(0, my_notify.build());
+                                notified[0] = true;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
                 }
 
 
@@ -169,7 +214,6 @@ public class MapVehicleViewerActivity extends FragmentActivity implements OnMapR
                     dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            //TODO Review stuff
                             Intent intent = new Intent(MapVehicleViewerActivity.this, ReviewActivity.class);
                             intent.putExtra("ID",ID);
                             startActivity(intent);
