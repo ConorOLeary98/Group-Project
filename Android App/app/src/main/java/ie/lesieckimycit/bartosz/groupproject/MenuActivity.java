@@ -9,23 +9,40 @@ import android.widget.Button;
 
 
 public class MenuActivity extends AppCompatActivity {
+    private Button mViewMap, mRequestTrip, mRegisterCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        
 
-        /*Button mapBtn = findViewById(R.id.btn_map);
+        mRequestTrip = findViewById(R.id.requestTrip);
+        mRegisterCard = findViewById(R.id.registerCard);
+        mViewMap = findViewById(R.id.viewMap);
 
-        mapBtn.setOnClickListener(new View.OnClickListener() {
+        mRequestTrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, TripRequestForm.class);
+                startActivity(intent);
+            }
+        });
+
+        mViewMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this, MapVehicleViewerActivity.class);
                 startActivity(intent);
-
             }
-        });*/
+        });
+
+        mRegisterCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, RegisterCardActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

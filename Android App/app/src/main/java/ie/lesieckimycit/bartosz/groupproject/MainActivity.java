@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
         mLogin = findViewById(R.id.login);
         mRegister = findViewById(R.id.register);
-        Button mTest = findViewById(R.id.button_test);
-        Button mTest2 = findViewById(R.id.button_test2);
+       /* Button mTest = findViewById(R.id.button_test);
+        Button mTest2 = findViewById(R.id.button_test2);*/
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mTest.setOnClickListener(new View.OnClickListener() {
+        /*mTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, TripRequestForm.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 }
 //test

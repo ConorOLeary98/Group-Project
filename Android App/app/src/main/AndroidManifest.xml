@@ -43,8 +43,7 @@
             android:name=".MapVehicleViewerActivity"
             android:label="@string/title_activity_map_vehicle_viewer" />
         <activity android:name=".TripRequestForm" />
-        <activity android:name=".PendingRequest" />
-        <activity android:name=".ReviewActivity"></activity>
+        <activity android:name=".PendingRequest"></activity>
     </application>
 
 </manifest>
