@@ -51,10 +51,11 @@ public class PendingRequest extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if ("approved".equals(dataSnapshot.child("state").getValue(String.class))){
-                    //TODO nav to map with data
                     bundle.putString("vehicleID",dataSnapshot.child("vehicleID").getValue(String.class));
+                    bundle.putString("ID",ID);
                     Intent intent = new Intent(PendingRequest.this, MapVehicleViewerActivity.class);
                     intent.putExtra("bundle",bundle);
+
 
                     startActivity(intent);
                 }

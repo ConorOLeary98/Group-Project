@@ -56,6 +56,7 @@ public class MapVehicleViewerActivity extends FragmentActivity implements OnMapR
         final LatLng startLatLng = bundle.getParcelable("start");
         final LatLng destLatLng = bundle.getParcelable("dest");
         String vehicleID = bundle.getString("vehicleID");
+        final String ID = bundle.getString("ID");
         final Boolean[] PICKED_UP = {false};
 
         googleMap.getUiSettings().setCompassEnabled(true);
@@ -156,6 +157,11 @@ public class MapVehicleViewerActivity extends FragmentActivity implements OnMapR
                 boolean isWithin50Meters = distanceInMeters < 50;
 
                 if (isWithin50Meters  && PICKED_UP[0]){
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("tripRequests").child(ID);
+                    myRef.child("state").setValue("finished");
+
+
                     AlertDialog dialog = new AlertDialog.Builder(MapVehicleViewerActivity.this).create();
                     dialog.setMessage("Trip completed\nWould you like to leave a review?");
 
@@ -164,7 +170,8 @@ public class MapVehicleViewerActivity extends FragmentActivity implements OnMapR
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //TODO Review stuff
-                            Intent intent = new Intent(MapVehicleViewerActivity.this, MenuActivity.class);
+                            Intent intent = new Intent(MapVehicleViewerActivity.this, ReviewActivity.class);
+                            intent.putExtra("ID",ID);
                             startActivity(intent);
                         }
                     });
