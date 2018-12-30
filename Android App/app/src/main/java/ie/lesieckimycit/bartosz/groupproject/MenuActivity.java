@@ -13,7 +13,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        Button mapBtn = findViewById(R.id.btn_map);
+        /*Button mapBtn = findViewById(R.id.btn_map);
 
         mapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,7 +22,7 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        });
+        });*/
 
     }
 }
