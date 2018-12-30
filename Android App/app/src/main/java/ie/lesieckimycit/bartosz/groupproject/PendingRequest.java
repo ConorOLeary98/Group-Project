@@ -1,5 +1,7 @@
 package ie.lesieckimycit.bartosz.groupproject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -51,15 +53,27 @@ public class PendingRequest extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if ("approved".equals(dataSnapshot.child("state").getValue(String.class))){
-                    //TODO nav to map with data
                     bundle.putString("vehicleID",dataSnapshot.child("vehicleID").getValue(String.class));
+                    bundle.putString("ID",ID);
                     Intent intent = new Intent(PendingRequest.this, MapVehicleViewerActivity.class);
                     intent.putExtra("bundle",bundle);
+
 
                     startActivity(intent);
                 }
                 else if("denied".equals(dataSnapshot.child("state").getValue(String.class))){
-                    //TODO alert saying trip denied
+                    AlertDialog dialog = new AlertDialog.Builder(PendingRequest.this).create();
+                    dialog.setMessage("Trip request DENIED");
+
+                    dialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(PendingRequest.this, MenuActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    dialog.show();
                 }
 
             }

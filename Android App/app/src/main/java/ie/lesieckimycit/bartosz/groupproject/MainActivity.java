@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         mTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MapVehicleViewerActivity.class);
+                Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
+                intent.putExtra("ID","XXXtestXXX");
                 startActivity(intent);
 
             }
