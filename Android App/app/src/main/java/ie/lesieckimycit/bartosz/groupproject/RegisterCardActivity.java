@@ -72,7 +72,7 @@ public class RegisterCardActivity extends AppCompatActivity{
 
             }
         });
-        
+
     }
 
 }
